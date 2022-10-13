@@ -14,7 +14,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://github.com/FrancineB/gitops-cert-level-2-examples-fb.git
-    targetRevision: test
+    targetRevision: HEAD
     path: ./app-of-apps/my-app-list
    
     # directory
