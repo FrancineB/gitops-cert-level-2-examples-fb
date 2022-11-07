@@ -47,11 +47,7 @@ jobs:
       
       - name: change all 
         run: |
-          #IMAGE_ID=ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
-
-          # Change all uppercase to lowercase
-          #IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          echo IMAGE_ID=${{ IMAGE_ID }}
+          echo " IMAGE_ID = ${{ IMAGE_ID }}"
           
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
