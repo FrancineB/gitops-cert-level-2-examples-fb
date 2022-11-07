@@ -48,7 +48,7 @@ jobs:
       - name: change all 
         run: |
           echo " IMAGE_ID = ${{ env.IMAGE_ID }}"
-          echo IMAGE_ID=${{ env.IMAGE_ID }}"
+          echo IMAGE_ID=${{ env.IMAGE_ID }}
           
           
       # Build and push Docker image with Buildx (don't push on PR)
