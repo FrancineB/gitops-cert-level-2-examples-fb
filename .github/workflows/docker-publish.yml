@@ -63,17 +63,19 @@ jobs:
       packages: write 
     needs: build-push
     steps:
-        # Build and push Docker image with Buildx (don't push on PR)
-        # https://github.com/docker/build-push-action
-        - name: push Docker image
-          id: push
-          uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
-          with:
-            context: ./image-updater/source-code
-            file: ./image-updater/source-code/Dockerfile
-            push: true
-          #  #tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
-            tags: ${{needs.build-push.outputs.output1}}
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      # Build and push Docker image with Buildx (don't push on PR)
+      # https://github.com/docker/build-push-action
+      - name: push Docker image
+        id: push
+        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
+        with:
+          context: ./image-updater/source-code
+          file: ./image-updater/source-code/Dockerfile
+          push: true
+        #  #tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
+          tags: ${{needs.build-push.outputs.output1}}
 
 
 
