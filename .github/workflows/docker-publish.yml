@@ -73,7 +73,7 @@ jobs:
             file: ./image-updater/source-code/Dockerfile
             push: true
           #  #tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
-            tags: echo ${{needs.build-push.outputs.output1}}
+            tags: ${{needs.build-push.outputs.output1}}
 
 
 
