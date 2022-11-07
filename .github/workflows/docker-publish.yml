@@ -21,7 +21,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  IMAGE_ID: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
+  IMAGE_ID: $(echo ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}| tr '[A-Z]' '[a-z]')
 
 
 jobs:
@@ -44,26 +44,26 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: change all 
+        run: |
+          #IMAGE_ID=ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
+
+          # Change all uppercase to lowercase
+          #IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          echo IMAGE_ID=${{ IMAGE_ID }}
           
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
-        run: |
-          IMAGE_ID=ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
-
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          echo IMAGE_ID=$IMAGE_ID
-          docker tag $IMAGE_ID
-          docker push $IMAGE_ID
-        #uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
-        #with:
-        #  context: ./image-updater/source-code
-        #  file: ./image-updater/source-code/Dockerfile
-        #  push: true
+        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
+        with:
+          context: ./image-updater/source-code
+          file: ./image-updater/source-code/Dockerfile
+          push: true
         #  #tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
-        #  tags: $IMAGE_ID
+          tags: ${{ IMAGE_ID }}
 
 
 
