@@ -51,8 +51,7 @@ jobs:
         run: |
           #echo " IMAGE_ID = ${{ env.IMAGE_ID }}"
           #echo IMAGE_ID=${{ env.IMAGE_ID }}
-          echo "image_id=$(echo ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}| tr '[A-Z]' '[a-z]')" >> $GITHUB_OUTPUT
-          echo ${{needs.build-push.outputs.output1}}
+          echo "image_id=$(ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}| tr '[A-Z]' '[a-z]')" >> $GITHUB_OUTPUT
           
   push:
 
