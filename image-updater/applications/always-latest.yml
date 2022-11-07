@@ -10,7 +10,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
+    repoURL: https://github.com/francineb/gitops-cert-level-2-examples-fb.git
     targetRevision: HEAD
     path: ./image-updater/example-app/envs/qa/
    
