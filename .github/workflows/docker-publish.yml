@@ -21,7 +21,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  IMAGE_ID: $(echo ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}| tr '[A-Z]' '[a-z]')
+  #IMAGE_ID: $(echo ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}| tr '[A-Z]' '[a-z]')
 
 
 jobs:
@@ -49,9 +49,10 @@ jobs:
       - name: change
         id: change
         run: |
-          echo " IMAGE_ID = ${{ env.IMAGE_ID }}"
-          echo IMAGE_ID=${{ env.IMAGE_ID }}
-          echo "image_id=${{ env.IMAGE_ID }}" >> $GITHUB_OUTPUT
+          #echo " IMAGE_ID = ${{ env.IMAGE_ID }}"
+          #echo IMAGE_ID=${{ env.IMAGE_ID }}
+          echo "image_id=$(echo ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}| tr '[A-Z]' '[a-z]')" >> $GITHUB_OUTPUT
+          echo ${{needs.build-push.outputs.output1}}
           
   push:
 
